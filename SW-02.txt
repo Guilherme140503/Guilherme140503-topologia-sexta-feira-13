@@ -1,0 +1,34 @@
+enable
+configure terminal 
+hostname SW-01
+enable password Saturno*Enable
+line console 0
+password Saturno*Console
+login
+end
+configure terminal
+banner motd "ATENCAO APENAS O DEPARTAMENTO DE TI DA EMPRESA SARTUNO LTDA TEM A AUTORIZACAO PARA ACESSAR ESSE EQUIPAMENTO"
+interface vlan 1
+ip address 172.16.15.254 255.255.255.0
+no shutdown
+exit
+ip domain-name sarturno.local 
+no ip domain-lookup
+crypto key generate rsa general-key modulus 1024
+username saturno privilege 15 secret batata*00
+line vty 0 15
+transport input ssh
+password Saturno*Console
+login
+exit
+service password-encryption
+interface vlan1
+description INTERFACE DE GERENCIAMENTO
+interface f0/1 
+description CONECTADA AO PC-01 
+interface f0/2
+description CONECTADA AO PC-02
+exit
+ip default-gateway 172.16.15.1
+exit
+wr
