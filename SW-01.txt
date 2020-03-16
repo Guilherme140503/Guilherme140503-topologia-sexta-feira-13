@@ -1,14 +1,14 @@
 switch
 
-	enable
-	configure terminal
+enable
+configure terminal
   hostname SW-01
   enable password Saturno*Enable
   line console 0
   password Saturno*Console
   login
   exit
-  banner motd "ATENCAO! APENAS O DEPARTAMENTO DE TI DA EMPRESA SARTUNO LTDA. TEM A AUTORIZACAO PARA ACESSAR ESSE EQUIPAMENTO!"
+  banner motd "ATENCAO APENAS O DEPARTAMENTO DE TI DA EMPRESA SARTUNO LTDA TEM A AUTORIZACAO PARA ACESSAR ESSE EQUIPAMENTO"
   interface vlan 1
   ip address 172.16.15.254 255.255.255.0
   no shutdown
@@ -17,16 +17,17 @@ switch
  no ip domain-lookup
  crypto key generate rsa general-key modulus 1024
  username saturno privilege 15 secret batata*00
-Configurar o serviço de SSH
 line vty 0 15
 transport input ssh
 password Saturno*Console
 login
 exit
 service password-encryption
-interface 
+interface vlan1
 description interface de gerenciamento
-ip dafault-gateway 172.16.15.1
+exit
+ip default-gateway 172.16.15.1
+exit
 wr
 
   
